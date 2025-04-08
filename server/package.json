@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Travel Voting and Itinerary App",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": ["serverless", "dynamodb", "travel", "itinerary"],
+  "author": "Veronica Pollock",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "serverless": "^3.x.x"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.0.0"
+  }
+}
