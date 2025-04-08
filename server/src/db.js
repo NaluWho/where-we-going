@@ -9,7 +9,7 @@ const docClient = DynamoDBDocumentClient.from(dynamo);
 const TABLES = {
     TRIPS: "Trips",
     USERS: "Users",
-    LOCATION_VOTES: "LocationVotes",
+    DESTINATION_VOTES: "DestinationVotes",
     START_DATE_VOTES: "StartDateVotes",
     END_DATE_VOTES: "EndDateVotes",
     LODGING_VOTES: "LodgingVotes",
