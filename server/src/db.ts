@@ -1,5 +1,5 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 
 const REGION = "us-west-2"; 
 
@@ -13,6 +13,8 @@ const TABLES = {
     START_DATE_VOTES: "StartDateVotes",
     END_DATE_VOTES: "EndDateVotes",
     LODGING_VOTES: "LodgingVotes",
-  };
+} as const;
   
+export type TableName = typeof TABLES[keyof typeof TABLES];
+
 export { dynamo, docClient, TABLES };

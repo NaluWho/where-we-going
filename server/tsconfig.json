@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",                       // Modern JS
+      "module": "CommonJS",                     // Node.js module system
+      "lib": ["ES6", "DOM"],                 // Modern JS APIs
+      "strict": true,                           // Enable all strict type-checking options
+      "esModuleInterop": true,                  // Allows import/export compatibility with CommonJS
+      "moduleResolution": "node",
+      "resolveJsonModule": true,                // To import JSON files
+      "skipLibCheck": true,                     // Skip type checking of dependencies for speed
+      "forceConsistentCasingInFileNames": true, // Prevents inconsistent import casing
+      "outDir": "dist",                         // Compiled JS will go here
+      "rootDir": "src"                          // TS source files
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+  }
