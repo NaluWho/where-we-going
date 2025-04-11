@@ -3,16 +3,26 @@
   "version": "1.0.0",
   "description": "Travel Voting and Itinerary App",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "test": "jest"
   },
-  "keywords": ["serverless", "dynamodb", "travel", "itinerary"],
+  "keywords": [
+    "serverless",
+    "dynamodb",
+    "travel",
+    "itinerary"
+  ],
   "author": "Veronica Pollock",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.9",
-    "serverless": "^3.x.x"
+    "serverless": "^3.x.x",
+    "ts-jest": "^29.3.1"
   },
   "dependencies": {
-    "aws-sdk": "^2.0.0"
+    "@aws-sdk/client-dynamodb": "^3.787.0",
+    "@aws-sdk/lib-dynamodb": "^3.787.0"
   }
 }

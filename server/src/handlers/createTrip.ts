@@ -26,10 +26,8 @@ interface TripItem {
     EndDateOptions?: string[];
     LodgingOptions?: string[];
 }
-  
-export const handler = async (event: APIGatewayProxyEvent): 
-    Promise<APIGatewayProxyResult> => {
 
+export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     let body: TripInput;
     try {
         body = JSON.parse(event.body || "{}");
@@ -51,6 +49,7 @@ export const handler = async (event: APIGatewayProxyEvent):
             lodgingOptions,
         } = body;
 
+        // Check if required fields are present
         if (!creatorID || !title || !pollCloseDateTime) {
             return {
                 statusCode: 400,
@@ -58,6 +57,7 @@ export const handler = async (event: APIGatewayProxyEvent):
             };
         }
 
+        // Create a new TripItem object to save to DynamoDB
         const tripID = uuidv4();
         const newTrip: TripItem = {
             TripID: tripID,
@@ -71,21 +71,39 @@ export const handler = async (event: APIGatewayProxyEvent):
             PollCloseDateTime: pollCloseDateTime,
         };
 
+        // Set up parameters for DynamoDB PutCommand
         const putParams = {
             TableName: TABLES.TRIPS,
             Item: newTrip,
         };
 
         await docClient.send(new PutCommand(putParams));
+
+        // Return a success response if everything went well
         return {
             statusCode: 201,
             body: JSON.stringify({ tripID }),
         };
     } catch (error) {
-        console.error("Error creating trip:", error);
+        let errorMessage = "Unknown error";
+        if (error instanceof Error) {
+            errorMessage = error.message;
+        } else if (typeof error === "object") {
+            try {
+                errorMessage = JSON.stringify(error);
+            } catch {
+                errorMessage = "Unserializable error object";
+            }
+        } else {
+            errorMessage = String(error);
+        }
+    
+        console.error("Error creating trip:", errorMessage);
+    
         return {
             statusCode: 500,
             body: JSON.stringify({ message: "Internal server error." }),
         };
     }
+    
 };
