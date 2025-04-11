@@ -85,25 +85,12 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
             body: JSON.stringify({ tripID }),
         };
     } catch (error) {
-        let errorMessage = "Unknown error";
-        if (error instanceof Error) {
-            errorMessage = error.message;
-        } else if (typeof error === "object") {
-            try {
-                errorMessage = JSON.stringify(error);
-            } catch {
-                errorMessage = "Unserializable error object";
-            }
-        } else {
-            errorMessage = String(error);
-        }
-    
-        console.error("Error creating trip:", errorMessage);
-    
+        // Log the error and return a 500 response
+        console.error("Error creating trip:", error instanceof Error ? error.message : error);
+        
         return {
             statusCode: 500,
             body: JSON.stringify({ message: "Internal server error." }),
         };
     }
-    
 };
